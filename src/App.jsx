@@ -1,4 +1,5 @@
 import './App.css';
+import { CardButton } from './components/CardButton/CardButton';
 import { SaidBarItem } from './components/SaidBarItem/SaidBarItem';
 import { Button } from './components/UI/Button';
 
@@ -20,8 +21,13 @@ export function App() {
       <h1>Header</h1>
       <p>Text</p>
       <Button />
-      <SaidBarItem title={data[0].title} text={data[0].text} date={data[0].date} />
-      <SaidBarItem title={data[1].title} text={data[1].text} date={data[1].date} />
+      <CardButton>Новое воспоминание</CardButton>
+      <CardButton>
+        <SaidBarItem title={data[0].title} text={data[0].text} date={data[0].date} />
+      </CardButton>
+      <CardButton>
+        <SaidBarItem title={data[1].title} text={data[1].text} date={data[1].date} />
+      </CardButton>
     </>
   );
 }

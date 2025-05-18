@@ -1,0 +1,7 @@
+.cardButton {
+  background: rgba(153, 50, 204, 0.5);
+  border-radius: 10px;
+  padding: 8px;
+  text-align: left;
+  margin: 10px;
+}
