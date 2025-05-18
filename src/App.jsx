@@ -1,4 +1,5 @@
 import './App.css';
+import { SaidBarItem } from './components/SaidBarItem/SaidBarItem';
 import { Button } from './components/UI/Button';
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   <h1>Header</h1>
   <p>Text</p>
   <Button/>
+  <SaidBarItem/>
   </>;
 }
 
