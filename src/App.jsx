@@ -2,13 +2,26 @@ import './App.css';
 import { SaidBarItem } from './components/SaidBarItem/SaidBarItem';
 import { Button } from './components/UI/Button';
 
-function App() {
-  return <>
-  <h1>Header</h1>
-  <p>Text</p>
-  <Button/>
-  <SaidBarItem/>
-  </>;
+export function App() {
+  const data = [
+    {
+      title: 'Поход в горы',
+      text: 'Вчера подумал, что было бы неплохо сходить в горы...',
+      date: new Date(),
+    },
+    {
+      title: 'Покупка автомобиля',
+      text: 'Для чего человеку автомобиль? Интересно ...',
+      date: new Date(),
+    },
+  ];
+  return (
+    <>
+      <h1>Header</h1>
+      <p>Text</p>
+      <Button />
+      <SaidBarItem title={data[0].title} text={data[0].text} date={data[0].date} />
+      <SaidBarItem title={data[1].title} text={data[1].text} date={data[1].date} />
+    </>
+  );
 }
-
-export default App;
