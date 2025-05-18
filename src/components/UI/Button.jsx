@@ -1,3 +1,5 @@
-export function Button () {
-    return <button>Сохранить</button>;
+import './Button.css';
+
+export function Button() {
+  return <button className='btn'>Сохранить</button>;
 }
