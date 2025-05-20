@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react';
 
 import { SideBar } from './layouts/SideBar/SideBar';
 import { Body } from './layouts/Body/Body';
@@ -8,19 +9,33 @@ import { CardButton } from './components/CardButton/CardButton';
 import { SaidBarItem } from './components/SaidBarItem/SaidBarItem';
 import { FormItem } from './components/FormItem/FormItem';
 
+const INITIAL_DATA = [
+  {
+    title: 'Поход в горы',
+    text: 'Вчера подумал, что было ...',
+    date: new Date(),
+  },
+  {
+    title: 'Покупка автомобиля',
+    text: 'Для чего человеку автом ...',
+    date: new Date(),
+  },
+];
+
 export function App() {
-  const data = [
-    {
-      title: 'Поход в горы',
-      text: 'Вчера подумал, что было ...',
-      date: new Date(),
-    },
-    {
-      title: 'Покупка автомобиля',
-      text: 'Для чего человеку автом ...',
-      date: new Date(),
-    },
-  ];
+  const [data, setData] = useState(INITIAL_DATA);
+
+  const addFormData = (items) => {
+    setData([
+      ...data,
+      {
+        title: items.title,
+        text: items.text,
+        date: new Date(items.date),
+      },
+    ]);
+  };
+
   return (
     <>
       <SideBar>
@@ -41,15 +56,15 @@ export function App() {
           </svg>
           <p>Новое воспоминание</p>
         </CardButton>
-        <CardButton>
-          <SaidBarItem title={data[0].title} text={data[0].text} date={data[0].date} />
-        </CardButton>
-        <CardButton>
-          <SaidBarItem title={data[1].title} text={data[1].text} date={data[1].date} />
-        </CardButton>
+        {/* TODO: Wrap CardButton in ListCard, less padding between CardButton */}
+        {data.map((el) => (
+          <CardButton>
+            <SaidBarItem title={el.title} text={el.text} date={el.date} />
+          </CardButton>
+        ))}
       </SideBar>
       <Body>
-        <FormItem />
+        <FormItem onClick={addFormData} />
       </Body>
     </>
   );

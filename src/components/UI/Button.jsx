@@ -3,10 +3,9 @@ import './Button.css';
 
 console.log('Ререндер');
 
-export function Button({text}) {
-
+export function Button({ text, onClick }) {
   return (
-    <button className='btn'>
+    <button className='btn' onClick={onClick}>
       {text}
     </button>
   );
