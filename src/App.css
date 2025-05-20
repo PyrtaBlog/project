@@ -1,4 +1,10 @@
 #root {
   display: flex;
-  height: 98vh;
+  height: 100vh;
+  background: #2b2b2b;
+  color: #fff;
+}
+
+.sideBarLogo {
+  font-size: 24px;
 }

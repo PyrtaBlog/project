@@ -3,14 +3,10 @@ import './Button.css';
 
 console.log('Ререндер');
 
-export function Button() {
-  const [text, setText] = useState('Сохранить');
-  const clicked = () => {
-    setText('Закрыть');
-  };
+export function Button({text}) {
 
   return (
-    <button className='btn' onClick={clicked}>
+    <button className='btn'>
       {text}
     </button>
   );
