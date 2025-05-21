@@ -8,18 +8,19 @@ import { Header } from './layouts/Header/Header';
 import { CardButton } from './components/CardButton/CardButton';
 import { SaidBarItem } from './components/SaidBarItem/SaidBarItem';
 import { FormItem } from './components/FormItem/FormItem';
+import {ListCards} from "./components/ListCards/ListCards.jsx";
 
 const INITIAL_DATA = [
   {
     title: 'Поход в горы',
     text: 'Вчера подумал, что было ...',
-    date: new Date(),
+    date: new Date()
   },
   {
     title: 'Покупка автомобиля',
     text: 'Для чего человеку автом ...',
-    date: new Date(),
-  },
+    date: new Date()
+  }
 ];
 
 export function App() {
@@ -31,8 +32,8 @@ export function App() {
       {
         title: items.title,
         text: items.text,
-        date: new Date(items.date),
-      },
+        date: new Date(items.date)
+      }
     ]);
   };
 
@@ -56,12 +57,14 @@ export function App() {
           </svg>
           <p>Новое воспоминание</p>
         </CardButton>
-        {/* TODO: Wrap CardButton in ListCard, less padding between CardButton */}
-        {data.map((el) => (
-          <CardButton>
-            <SaidBarItem title={el.title} text={el.text} date={el.date} />
-          </CardButton>
-        ))}
+        <ListCards>
+          {data.map((el) => (
+              <CardButton>
+                <SaidBarItem title={el.title} text={el.text} date={el.date} />
+              </CardButton>
+          ))}
+        </ListCards>
+
       </SideBar>
       <Body>
         <FormItem onClick={addFormData} />

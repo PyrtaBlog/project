@@ -1,0 +1,6 @@
+.listCards {
+  width: 100%;
+}
+.listCards .cardButton {
+  margin-bottom: 20px;
+}
