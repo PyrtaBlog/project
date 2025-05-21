@@ -6,24 +6,21 @@ import {Body} from './layouts/Body/Body';
 import {Header} from './layouts/Header/Header';
 
 import {CardButton} from './components/CardButton/CardButton';
-import {SaidBarItem} from './components/SaidBarItem/SaidBarItem';
 import {FormItem} from './components/FormItem/FormItem';
 import {ListCards} from "./components/ListCards/ListCards.jsx";
 
-const INITIAL_DATA = [
-    {
-        id: 1,
-        title: 'Поход в горы',
-        text: 'Вчера подумал, что было ...',
-        date: new Date()
-    },
+const INITIAL_DATA = [{
+    id: 1,
+    title: 'Поход в горы',
+    text: 'Вчера подумал, что было ...',
+    date: new Date()
+},
     {
         id: 2,
         title: 'Покупка автомобиля',
         text: 'Для чего человеку автом ...',
         date: new Date()
-    }
-];
+    }];
 
 export function App() {
     const [data, setData] = useState(INITIAL_DATA);
@@ -32,19 +29,13 @@ export function App() {
         setData([
             ...data,
             {
-                id: Math.max(...data.map(i => i.id)) + 1,
+                id: data.length === 0 ? 1 : Math.max(...data.map(i => i.id)) + 1,
                 title: items.title,
                 text: items.text,
                 date: new Date(items.date)
             }
         ]);
     };
-    const sortedCards = (a, b) => {
-        if (a.date > b.date) {
-            return -1;
-        }
-    };
-
     return (
         <>
             <SideBar>
@@ -65,14 +56,7 @@ export function App() {
                     </svg>
                     <p>Новое воспоминание</p>
                 </CardButton>
-                <ListCards>
-                    {data.sort(sortedCards).map((el) => (
-                        <CardButton key={el.id}>
-                            <SaidBarItem title={el.title} text={el.text} date={el.date}/>
-                        </CardButton>
-                    ))}
-                </ListCards>
-
+                <ListCards data={data}/>
             </SideBar>
             <Body>
                 <FormItem onClick={addFormData}/>
