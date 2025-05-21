@@ -32,7 +32,7 @@ export function App() {
                 id: data.length === 0 ? 1 : Math.max(...data.map(i => i.id)) + 1,
                 title: items.title,
                 text: items.text,
-                date: new Date(items.date)
+                date: items.date === '' ? new Date : new Date(items.date)
             }
         ]);
     };
