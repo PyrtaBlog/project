@@ -26,6 +26,7 @@ export function App() {
     const [data, setData] = useState(INITIAL_DATA);
 
     const addFormData = (items) => {
+        console.log(items);
         setData([
             ...data,
             {

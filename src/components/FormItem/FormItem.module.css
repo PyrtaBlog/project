@@ -1,0 +1,23 @@
+.input {
+    border: 1px solid #646cff;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 8px;
+}
+
+.formInput {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 500px;
+}
+
+.errorText {
+    color: #f80707;
+    font-size: 14px;
+}
+
+.errorInput {
+    border: 2px solid #f80707;
+}
