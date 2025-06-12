@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import {SideBar} from './layouts/SideBar/SideBar';
 import {Body} from './layouts/Body/Body';
@@ -10,21 +10,22 @@ import {FormItem} from './components/FormItem/FormItem';
 import {ListCards} from "./components/ListCards/ListCards.jsx";
 import {PlusSVG} from "./components/UI/svg/PlusSVG.jsx";
 
-const INITIAL_DATA = [{
-    id: 1,
-    title: 'Поход в горы',
-    text: 'Вчера подумал, что было ...',
-    date: new Date()
-},
-    {
-        id: 2,
-        title: 'Покупка автомобиля',
-        text: 'Для чего человеку автом ...',
-        date: new Date()
-    }];
+// const INITIAL_DATA = ;
 
 export function App() {
-    const [data, setData] = useState(INITIAL_DATA);
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem("data"));
+        if (items) {
+            setData(items.map(item => ({
+                ...item,
+                date: new Date(item.date)
+            })));
+        }
+    }, []);
+
 
     const addFormData = (items) => {
         console.log(items);
