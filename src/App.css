@@ -1,9 +1,10 @@
 #root {
-  display: flex;
-  background: #2b2b2b;
-  color: #fff;
+    display: flex;
+    background: #2b2b2b;
+    color: #fff;
+    min-height: 100vh;
 }
 
 .sideBarLogo {
-  font-size: 24px;
+    font-size: 24px;
 }

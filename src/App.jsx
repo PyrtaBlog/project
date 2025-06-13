@@ -26,6 +26,12 @@ export function App() {
         }
     }, []);
 
+    useEffect(() => {
+        if (data.length) {
+            const newItems = JSON.stringify(data);
+            localStorage.setItem("data", newItems);
+        }
+    }, [data]);
 
     const addFormData = (items) => {
         console.log(items);
