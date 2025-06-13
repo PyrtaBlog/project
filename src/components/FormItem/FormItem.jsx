@@ -1,18 +1,33 @@
 import styles from './FormItem.module.css';
 import cn from 'classnames';
-import {textArea} from "./text.js";
+import {textArea, textTitle} from "./text.js";
 
 import {Button} from '../UI/Button';
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const DEFAULT_ERROR = {
+    title: false,
+    date: false,
+    text: false
+};
 
 
 export function FormItem({onClick}) {
 
-    const [hasError, setHasError] = React.useState({
-        title: false,
-        date: false,
-        text: false
-    });
+    const [hasError, setHasError] = React.useState(DEFAULT_ERROR);
+
+    useEffect(()=>{
+        const clearError = setTimeout(()=>{
+            console.log("Reset error");
+            setHasError(DEFAULT_ERROR);
+        }, 3000);
+        return (()=>{
+            clearTimeout(clearError);
+        });
+    }, [hasError]);
+    
+    const [titleValue, setTitleValue] = useState(textTitle);
+    const [textValue, setTextValue] = useState(textArea);
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -64,7 +79,13 @@ export function FormItem({onClick}) {
             {hasError.title && (
                 <p className={styles.errorText}>Поле не может быть пустым!</p>
             )}
-            <input type="text" name="title" className={titleCls} value="Поход в горы"/>
+            <input 
+                type="text" 
+                name="title" 
+                className={titleCls} 
+                value={titleValue} 
+                onChange={(e) => setTitleValue(e.target.value)}
+            />
             {hasError.date && (
                 <p className={styles.errorText}>Укажите дату!</p>
             )}
@@ -73,7 +94,13 @@ export function FormItem({onClick}) {
             {hasError.text && (
                 <p className={styles.errorText}>Поле не может быть пустым!</p>
             )}
-            <textarea name="text" className={textCls} rows={20} value={textArea}/>
+            <textarea 
+                name="text" 
+                className={textCls} 
+                rows={20} 
+                value={textValue} 
+                onChange={(e) => setTextValue(e.target.value)}
+            />
             <Button text="Сохранить"/>
         </form>
     );
