@@ -35,6 +35,7 @@ export function reducer(state, action) {
   }
 }
 
+// Начальный тип формы
 export const stateType = {
   formInitial: {
     textTitle: "",
