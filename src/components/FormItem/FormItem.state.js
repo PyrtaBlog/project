@@ -3,22 +3,34 @@ export function reducer(state, action) {
     case "clean":
       return {
         ...state,
-        formInitial: stateType.formInitial,
+        formInitial: {
+          ...stateType.formInitial,
+          date: undefined,
+        },
       };
-    case "change": {
+    case "resetError": {
       return {
         ...state,
+        formError: stateType.formError,
+      };
+    }
+    case "change": {
+      const newState = {
+        ...state,
         formInitial: {
+          ...state.formInitial,
           [action.field]: action.value,
         },
       };
+
+      return newState;
     }
     case "valid": {
       const { payload } = action;
       const err = {
         title: payload.textTitle.trim() === "",
         date: payload.date.trim() === "",
-        text: payload.text.trim() === "",
+        text: payload.textArea.trim() === "",
       };
       const hasErrors = Object.values(err).some(Boolean);
       if (hasErrors) {
