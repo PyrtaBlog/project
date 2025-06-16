@@ -6,19 +6,30 @@ export function reducer(state, action) {
         formInitial: stateType.formInitial,
       };
     case "change": {
-      // console.log(action);
-      console.log({
-        ...state,
-        formInitial: {
-          [action.field]: action.value,
-        },
-      });
-
       return {
         ...state,
         formInitial: {
           [action.field]: action.value,
         },
+      };
+    }
+    case "valid": {
+      const { payload } = action;
+      const err = {
+        title: payload.textTitle.trim() === "",
+        date: payload.date.trim() === "",
+        text: payload.text.trim() === "",
+      };
+      const hasErrors = Object.values(err).some(Boolean);
+      if (hasErrors) {
+        return {
+          ...state,
+          formError: err,
+        };
+      }
+      return {
+        ...state,
+        formReady: true,
       };
     }
   }
@@ -31,4 +42,10 @@ export const stateType = {
     date: "",
     tags: "",
   },
+  formError: {
+    title: false,
+    date: false,
+    text: false,
+  },
+  formReady: false,
 };

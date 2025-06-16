@@ -6,57 +6,33 @@ import { Button } from "../UI/Button";
 import React, { useEffect, useState, useReducer } from "react";
 import { reducer, stateType } from "./FormItem.state";
 
-const DEFAULT_ERROR = {
-  title: false,
-  date: false,
-  text: false,
-};
-
 export function FormItem({ onClick }) {
-  const [hasError, setHasError] = React.useState(DEFAULT_ERROR);
-  // const [titleValue, setTitleValue] = useState("");
-  const [textValue, setTextValue] = useState("");
-
   const [state, dispatch] = useReducer(reducer, stateType);
-  // console.log(state.formInitial);
+  const [hasError, setHasError] = React.useState(state.formError);
+  const [textValue, setTextValue] = useState("");
 
   useEffect(() => {
     const clearError = setTimeout(() => {
-      console.log("Reset error");
-      setHasError(DEFAULT_ERROR);
+      setHasError(state.formError);
     }, 3000);
     return () => {
       clearTimeout(clearError);
     };
-  }, [hasError]);
+  }, [hasError, state.formError]);
 
   const submitForm = (e) => {
     e.preventDefault();
+    console.log(state);
     const formData = new FormData(e.target);
     const formItems = Object.fromEntries(formData);
-    // console.log(formItems);
-
-    // Валидируем форму и получаем статус ошибок
-    const errors = validateForm(formItems);
-
-    // Проверяем наличие хотя бы одной ошибки
-    const hasErrors = Object.values(errors).some(Boolean);
-
-    if (hasErrors) {
-      setHasError(errors);
-      return;
-    }
     onClick(formItems);
-    dispatch({ type: "clean" });
   };
 
-  const validateForm = (data) => {
-    // Создаем новый объект ошибок
-    return {
-      // title: data.title.trim() === "",
-      text: data.text.trim() === "",
-      date: data.date.trim() === "",
-    };
+  const validForm = (e) => {
+    const formData = new FormData(e.target.form);
+    const formItems = Object.fromEntries(formData);
+    dispatch({ type: "valid", payload: formItems });
+    // console.log(e);
   };
 
   // Для стилей используем вычисляемое значение
@@ -107,7 +83,7 @@ export function FormItem({ onClick }) {
         value={textValue}
         onChange={(e) => setTextValue(e.target.value)}
       />
-      <Button text="Сохранить" />
+      <Button text="Сохранить" onClick={validForm} />
     </form>
   );
 }
