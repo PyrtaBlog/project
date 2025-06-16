@@ -28,11 +28,12 @@ export function FormItem({ onClick }) {
     onClick(formItems);
   };
 
+  // Валидируем форму
   const validForm = (e) => {
     const formData = new FormData(e.target.form);
     const formItems = Object.fromEntries(formData);
     dispatch({ type: "valid", payload: formItems });
-    // console.log(e);
+    console.log(e);
   };
 
   // Для стилей используем вычисляемое значение
